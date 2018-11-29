@@ -28,10 +28,12 @@ public class PercolationBFS extends PercolationDFSFast {
             int[]a = {-1,0,0,1};
             int[]b = {0,-1,1,0};
             for (int x = 0; x < 4; x++) {
-            	if (isOpen(trow+a[x], tcol+b[x]) && !isFull(trow+a[x], tcol+b[x])) {
-                	myGrid[trow+a[x]][tcol+b[x]] = FULL;
-                	num = ((trow+a[x]) * myGrid.length) + (tcol+b[x]);
-            		qj.add(num);
+            	if (inBounds(trow+a[x], tcol+b[x])) {
+	            	if (isOpen(trow+a[x], tcol+b[x]) && !isFull(trow+a[x], tcol+b[x])) {
+	                	myGrid[trow+a[x]][tcol+b[x]] = FULL;
+	                	num = ((trow+a[x]) * myGrid.length) + (tcol+b[x]);
+	            		qj.add(num);
+	            	}
             	}
             }
 		}
