@@ -14,7 +14,6 @@ public class PercolationDFSFast extends PercolationDFS {
 	        for (int x = 0; x < 4; x++) {
 	        	if (inBounds(row+a[x], col+b[x])) {
 	        		dfs(row,col);
-	        		break;
 	        	}
 	        }
 		}
