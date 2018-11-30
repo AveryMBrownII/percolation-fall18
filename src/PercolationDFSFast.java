@@ -18,7 +18,7 @@ public class PercolationDFSFast extends PercolationDFS {
 		    		if (isFull(row+a[x], col+b[x])) check = true;
 		        }
 			}
-		    if ((check == true) && (row != 0)) dfs(row,col);
+		    if (check == true) dfs(row,col);
 		}
 	} 
 }
