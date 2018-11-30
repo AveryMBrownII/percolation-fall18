@@ -13,8 +13,7 @@ public class PercolationDFSFast extends PercolationDFS {
         int[]b = {0,-1,1,0};
         for (int x = 0; x < 4; x++) {
         	if (inBounds(row+a[x], col+b[x])) {
-        		dfs(row,col);
-
+        		if (isFull(row+a[x], col+b[x])) dfs(row,col);
 	        }
 		}
 			
