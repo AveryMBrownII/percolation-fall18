@@ -4,10 +4,10 @@ import org.junit.Test;
 public class TestUFPercolation {
 	
 	public IPercolate getPercolator(int size) {
-		IUnionFind finder = new QuickFind();
-		//IPercolate perc = new PercolationUF(int size, IUnionFind finder)
-		//return perc;
-		return null;
+		//IUnionFind finder = new QuickFind();
+		IPercolate perc = new PercolationUF(size,new QuickUWPC());
+		return perc;
+		//return null;
 	}
 	
 	/**

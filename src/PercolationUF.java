@@ -13,9 +13,9 @@ public class PercolationUF implements IPercolate {
 		finder.initialize(size);
 		VTOP = (size*size);
 		VBOTTOM = (size*size)+1;
-		for (int r = 0; r < myGrid.length; r++) {
-			for (int c = 0; c < myGrid[0].length; c++) {
-				myGrid[r][c] = ((r * myGrid.length) + c);
+		for (int r = 0; r < size; r++) {
+			for (int c = 0; c < size; c++) {
+				myGrid[r][c] = ((r * size) + c);
 			}
 		}
 	}
@@ -31,13 +31,14 @@ public class PercolationUF implements IPercolate {
 		myOpenCount += 1;
 		myGrid[row][col] = OPEN;
 	    if (row == 0) myFinder.union(myGrid[row][col], VTOP);
-    	if (row == (myGrid.length -1)) myFinder.union(myGrid[row][col], VBOTTOM);
+    	if (row == myGrid.length-1) myFinder.union(myGrid[row][col], VBOTTOM);
     	int[]a = {-1,0,0,1};
 	    int[]b = {0,-1,1,0};
 	    for (int x = 0; x < 4; x++) {
 	    	if (inBounds(row+a[x], col+b[x])) {
-	    		myFinder.union(myGrid[row][col], myGrid[row+a[x]][col+b[x]]);
-	    		open(row+a[x],col+b[x]);
+	    		if (isOpen(row+a[x], col+b[x])){
+	    			myFinder.union(myGrid[row][col], myGrid[row+a[x]][col+b[x]]);
+	    		}
 	        }
 		}
 	}
@@ -58,7 +59,6 @@ public class PercolationUF implements IPercolate {
 					String.format("(%d,%d) not in bounds", row,col));
 		}
 		return myFinder.connected(myGrid[row][col], VTOP);
-		
 	}
 
 	@Override
@@ -70,6 +70,7 @@ public class PercolationUF implements IPercolate {
 	public int numberOfOpenSites() {
 		return myOpenCount;
 	}
+	
 	protected boolean inBounds(int row, int col) {
 		if (row < 0 || row >= myGrid.length) return false;
 		if (col < 0 || col >= myGrid[0].length) return false;
