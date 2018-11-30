@@ -37,6 +37,7 @@ public class PercolationUF implements IPercolate {
 	    for (int x = 0; x < 4; x++) {
 	    	if (inBounds(row+a[x], col+b[x])) {
 	    		myFinder.union(myGrid[row][col], myGrid[row+a[x]][col+b[x]]);
+	    		open(row+a[x],col+b[x]);
 	        }
 		}
 	}
