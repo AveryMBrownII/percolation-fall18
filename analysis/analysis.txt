@@ -1,10 +1,8 @@
-Your name
-Your netid
-
-Copy/Paste results from PercolationStats using PercolationDFS
-
+Avery Brown
+amb222
 
 Copy/Paste results from PercolationStats using PercolationDFSFast
+
 
 
 Copy/Paste results from PercolationStats using PercolationBFS
