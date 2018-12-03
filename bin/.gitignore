@@ -1,7 +1,10 @@
 /IPercolate.class
 /IUnionFind.class
 /InteractivePercolationVisualizer.class
+/PercolationBFS.class
 /PercolationDFS.class
+/PercolationDFSFast.class
+/PercolationUF.class
 /QuickFind.class
 /QuickUW.class
 /QuickUWPC.class
@@ -9,6 +12,3 @@
 /StdStats.class
 /TestDFSPercolation.class
 /TestUFPercolation.class
-/PercolationUF.class
-/PercolationDFSFast.class
-/PercolationBFS.class
