@@ -1,7 +1,7 @@
 
 public class PercolationUF implements IPercolate {
 
-	int[][]myGrid;
+	boolean[][]myGrid;
 	Integer myOpenCount;
 	IUnionFind myFinder;
 	private final int VTOP;
@@ -9,13 +9,15 @@ public class PercolationUF implements IPercolate {
 	
 	
 	public PercolationUF(int size, IUnionFind finder) {
-		myGrid = new int[size][size];
-		finder.initialize(size);
+		myGrid = new boolean[size][size];
+		myFinder = finder;
+		finder.initialize((size*size)+2);
 		VTOP = (size*size);
 		VBOTTOM = (size*size)+1;
 		for (int r = 0; r < size; r++) {
 			for (int c = 0; c < size; c++) {
-				myGrid[r][c] = ((r * size) + c);
+				//myGrid[r][c] = ((r * size) + c);
+				myGrid[r][c] = false;
 			}
 		}
 	}
@@ -26,18 +28,18 @@ public class PercolationUF implements IPercolate {
 			throw new IndexOutOfBoundsException(
 					String.format("(%d,%d) not in bounds", row,col)); 
 		}
-		if (myGrid[row][col] != BLOCKED)
+		if (myGrid[row][col] != false)
 			return;
 		myOpenCount += 1;
-		myGrid[row][col] = OPEN;
-	    if (row == 0) myFinder.union(myGrid[row][col], VTOP);
-    	if (row == myGrid.length-1) myFinder.union(myGrid[row][col], VBOTTOM);
+		myGrid[row][col] = true;
+	    if (row == 0) myFinder.union(((row * myGrid.length) + col), VTOP);
+    	if (row == myGrid.length-1) myFinder.union(((row * myGrid.length) + col), VBOTTOM);
     	int[]a = {-1,0,0,1};
 	    int[]b = {0,-1,1,0};
 	    for (int x = 0; x < 4; x++) {
 	    	if (inBounds(row+a[x], col+b[x])) {
 	    		if (isOpen(row+a[x], col+b[x])){
-	    			myFinder.union(myGrid[row][col], myGrid[row+a[x]][col+b[x]]);
+	    			myFinder.union(((row * myGrid.length) + col),(((row+a[x]) * myGrid.length) + (col+b[x])));
 	    		}
 	        }
 		}
@@ -49,7 +51,7 @@ public class PercolationUF implements IPercolate {
 			throw new IndexOutOfBoundsException(
 					String.format("(%d,%d) not in bounds", row,col));
 		}
-		return myGrid[row][col] != BLOCKED;
+		return myGrid[row][col];
 	}
 
 	@Override
@@ -58,7 +60,7 @@ public class PercolationUF implements IPercolate {
 			throw new IndexOutOfBoundsException(
 					String.format("(%d,%d) not in bounds", row,col));
 		}
-		return myFinder.connected(myGrid[row][col], VTOP);
+		return myFinder.connected(((row * myGrid.length) + col), VTOP);
 	}
 
 	@Override
