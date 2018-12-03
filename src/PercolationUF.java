@@ -10,13 +10,13 @@ public class PercolationUF implements IPercolate {
 	
 	public PercolationUF(int size, IUnionFind finder) {
 		myGrid = new boolean[size][size];
+		myOpenCount = 0;
 		myFinder = finder;
 		finder.initialize((size*size)+2);
 		VTOP = (size*size);
 		VBOTTOM = (size*size)+1;
 		for (int r = 0; r < size; r++) {
 			for (int c = 0; c < size; c++) {
-				//myGrid[r][c] = ((r * size) + c);
 				myGrid[r][c] = false;
 			}
 		}
@@ -28,8 +28,7 @@ public class PercolationUF implements IPercolate {
 			throw new IndexOutOfBoundsException(
 					String.format("(%d,%d) not in bounds", row,col)); 
 		}
-		if (myGrid[row][col] != false)
-			return;
+		if (myGrid[row][col] != false) return;
 		myOpenCount += 1;
 		myGrid[row][col] = true;
 	    if (row == 0) myFinder.union(((row * myGrid.length) + col), VTOP);
