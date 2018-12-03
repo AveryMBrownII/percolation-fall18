@@ -3,18 +3,84 @@ amb222
 
 Copy/Paste results from PercolationStats using PercolationDFSFast
 
+simulation data for 20 trials
+grid	mean	stddev	time
+100	0.593	0.014	0.146
+200	0.591	0.010	0.165
+400	0.590	0.006	0.854
+800	0.594	0.004	6.591
+Exception in thread "main" java.lang.StackOverflowError
 
 
 Copy/Paste results from PercolationStats using PercolationBFS
+
+simulation data for 20 trials
+grid	mean	stddev	time
+100	0.593	0.014	0.219
+200	0.591	0.010	0.270
+400	0.590	0.006	1.061
+800	0.594	0.004	7.424
+1600	0.592	0.002	35.834
+3200	0.593	0.001	205.756
 
 
 Copy/Paste results from PercolationStats using PercolationUF 
 with the QuickUWPC UnionFind implementation.
 
+simulation data for 20 trials
+grid	mean	stddev	time
+100	0.593	0.014	0.149
+200	0.591	0.010	0.247
+400	0.590	0.006	0.778
+800	0.594	0.004	5.435
+1600	0.592	0.002	25.589
+3200	0.593	0.001	137.458
+
 1. How does doubling the grid size affect running time (keeping # trials fixed)
 
+Doubling the grid size exponentially increases the running time. When the grid size doubled from 800 to 1600,
+the running time increased from 5.435 to 25.589 and when the grid size doubled from 1600 to 3200, the running
+time increased from 25.589 to 137.458. These running time increases indicate that it is exponentially correlated.
 
 2. How does doubling the number of trials affect running time.
 
+simulation data for 5 trials
+grid	mean	stddev	time
+100	0.605	0.011	0.084
+200	0.592	0.013	0.085
+400	0.594	0.004	0.253
+800	0.591	0.002	1.543
+1600	0.593	0.003	6.537
+3200	0.593	0.001	34.058
+
+simulation data for 10 trials
+grid	mean	stddev	time
+100	0.593	0.019	0.071
+200	0.596	0.006	0.136
+400	0.592	0.006	0.740
+800	0.592	0.003	3.704
+1600	0.594	0.002	15.946
+3200	0.593	0.001	67.913
+
+simulation data for 20 trials
+grid	mean	stddev	time
+100	0.593	0.014	0.149
+200	0.591	0.010	0.247
+400	0.590	0.006	0.778
+800	0.594	0.004	5.435
+1600	0.592	0.002	25.589
+3200	0.593	0.001	137.458
+
+Doubling the number of trials appears to double the running time. 
+When dealing with a grid size of 3200, the running times are 34.058, 67.913, 137.458
+for 5 trials, 10 trials, and 20 trials respectively. 34 doubled is 68 which is around 67.913 and 
+68 doubled is 136 which is around 137.458 so I believe that my correlation is correct. 
 
 3. Estimate the largest grid size you can run in 24 hours with 20 trials. Explain your reasoning.
+
+The largest grid size that I could run in 24 hours with 20 trials is 12,800.
+There are 86,400 seconds in 24 hours and I believe that doubling the final grid size that I did in my trials (3200)
+twice would result in a running time that is equal/greater than 86,400 due to the exponential running time correlation
+that I found in question number 1.
+
+
